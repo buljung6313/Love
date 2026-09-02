@@ -24,47 +24,55 @@
             position: absolute;
             white-space: nowrap;
             font-weight: bold;
-            color: #ff3385;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
             animation: pulse 1.5s infinite alternate;
         }
 
         @keyframes pulse {
             0% { transform: scale(1); }
-            100% { transform: scale(1.1); }
+            100% { transform: scale(1.08); }
         }
     </style>
 </head>
 <body>
 
 <script>
-    const message = "선생님 너무 예뻐요!! ❤️";
-    const colors = ["#ff0066", "#ff3399", "#ff66b2", "#e6005c", "#cc0052"];
+    // 추가된 문구 목록
+    const messages = [
+        "선생님 너무 예뻐요!! ❤️",
+        "선생님 사랑해요! 💕",
+        "선생님 아름다워요✨",
+        "김선찬교 짱! 👏"
+    ];
 
-    // 화면을 텍스트로 가득 채우는 함수
+    const colors = ["#ff0066", "#ff3399", "#ff66b2", "#e6005c", "#cc0052", "#990033", "#ff1a75"];
+
     function fillScreen() {
         const width = window.innerWidth;
         const height = window.innerHeight;
         
-        // 텍스트 격자 간격
-        const xStep = 180;
-        const yStep = 50;
+        // 간격 설정
+        const xStep = 190;
+        const yStep = 45;
 
         for (let y = 0; y < height; y += yStep) {
             for (let x = -50; x < width; x += xStep) {
                 const span = document.createElement('span');
                 span.className = 'text-item';
-                span.innerText = message;
                 
-                // 약간의 위치 랜덤 및 지그재그 배치
-                const randomX = x + (Math.random() * 20 - 10) + ((y / yStep) % 2 === 0 ? 0 : 40);
+                // 무작위로 문구 선택
+                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                span.innerText = randomMessage;
+                
+                // 지그재그 및 미세 위치 랜덤화
+                const randomX = x + (Math.random() * 20 - 10) + ((y / yStep) % 2 === 0 ? 0 : 50);
                 const randomY = y + (Math.random() * 10 - 5);
                 
                 span.style.left = `${randomX}px`;
                 span.style.top = `${randomY}px`;
                 
-                // 크기 및 색상 다채롭게 적용
-                span.style.fontSize = `${16 + Math.random() * 8}px`;
+                // 다양한 크기 및 색상 설정
+                span.style.fontSize = `${15 + Math.random() * 9}px`;
                 span.style.color = colors[Math.floor(Math.random() * colors.length)];
                 span.style.animationDelay = `${Math.random() * 1.5}s`;
 
