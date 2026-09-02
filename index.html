@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>선생님께 전하는 메시지</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #ffe6f0;
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            overflow: hidden; /* 스크롤바 감추기 */
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+        }
+
+        .text-item {
+            position: absolute;
+            white-space: nowrap;
+            font-weight: bold;
+            color: #ff3385;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            animation: pulse 1.5s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    const message = "선생님 너무 예뻐요!! ❤️";
+    const colors = ["#ff0066", "#ff3399", "#ff66b2", "#e6005c", "#cc0052"];
+
+    // 화면을 텍스트로 가득 채우는 함수
+    function fillScreen() {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        
+        // 텍스트 격자 간격
+        const xStep = 180;
+        const yStep = 50;
+
+        for (let y = 0; y < height; y += yStep) {
+            for (let x = -50; x < width; x += xStep) {
+                const span = document.createElement('span');
+                span.className = 'text-item';
+                span.innerText = message;
+                
+                // 약간의 위치 랜덤 및 지그재그 배치
+                const randomX = x + (Math.random() * 20 - 10) + ((y / yStep) % 2 === 0 ? 0 : 40);
+                const randomY = y + (Math.random() * 10 - 5);
+                
+                span.style.left = `${randomX}px`;
+                span.style.top = `${randomY}px`;
+                
+                // 크기 및 색상 다채롭게 적용
+                span.style.fontSize = `${16 + Math.random() * 8}px`;
+                span.style.color = colors[Math.floor(Math.random() * colors.length)];
+                span.style.animationDelay = `${Math.random() * 1.5}s`;
+
+                document.body.appendChild(span);
+            }
+        }
+    }
+
+    window.onload = fillScreen;
+</script>
+
+</body>
+</html>
+
